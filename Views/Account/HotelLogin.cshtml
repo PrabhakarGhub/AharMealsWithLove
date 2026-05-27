@@ -1,0 +1,13 @@
+@model AharMealsWithLove.Models.HotelLoginViewModel
+@{ ViewData["Title"] = "Hotel Login"; }
+<div class="page-header"><div class="container"><h1><i class="fa fa-hotel me-3 text-warning"></i>Hotel Login</h1></div></div>
+<div class="container pb-5"><div class="row justify-content-center"><div class="col-md-5">
+  <div class="ahar-card p-4">
+    @if(Model.ErrorMessage != null){ <div class="alert alert-danger">@Model.ErrorMessage</div> }
+    <form asp-action="HotelLogin" method="post">
+      <div class="mb-3"><label class="form-label fw-bold">Hotel ID</label><input asp-for="HotelId" class="form-control form-control-lg" placeholder="Hotel ID"/></div>
+      <div class="mb-3"><label class="form-label fw-bold">Password</label><input asp-for="Password" type="password" class="form-control form-control-lg"/></div>
+      <button type="submit" class="btn btn-success w-100 btn-lg"><i class="fa fa-sign-in-alt me-2"></i>Login</button>
+    </form>
+  </div>
+</div></div></div>

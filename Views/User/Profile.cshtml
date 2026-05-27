@@ -1,0 +1,28 @@
+@model AharMealsWithLove.Models.ProfileViewModel
+@{ ViewData["Title"] = "My Profile"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_UserSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-user text-warning me-2"></i>My Profile</h3>
+    @if(Model.Message != null){ <div class="alert alert-success"><i class="fa fa-check-circle me-2"></i>@Model.Message</div> }
+    <div class="ahar-card p-4">
+      <form asp-action="Profile" method="post" enctype="multipart/form-data">
+        <div class="row g-3">
+          <div class="col-md-6"><label class="form-label fw-bold">Full Name</label><input asp-for="Name" class="form-control" placeholder="Your full name"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Email</label><input asp-for="Email" class="form-control" readonly/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Gender</label><select asp-for="Gender" class="form-select"><option value="">Select</option><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Date of Birth</label><input asp-for="DOB" class="form-control" type="date"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Phone</label><input asp-for="Phone" class="form-control" placeholder="Phone number"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Aadhar</label><input asp-for="Aadhar" class="form-control" placeholder="Aadhar number"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Area Code</label><select asp-for="AreaCode" class="form-select"><option>110</option><option>112</option><option>114</option></select></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Address</label><input asp-for="Address" class="form-control" placeholder="Your address"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Profile Image</label><input asp-for="Image" type="file" class="form-control" accept="image/*"/>
+            @if(!string.IsNullOrEmpty(Model.ExistingImage)){ <img src="@Model.ExistingImage" height="50" class="mt-2 rounded" onerror="this.style.display='none'"/> }
+          </div>
+          <input asp-for="ExistingImage" type="hidden"/>
+          <div class="col-12"><button type="submit" class="btn btn-ahar btn-lg px-5"><i class="fa fa-save me-2"></i>Update Profile</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div></div>

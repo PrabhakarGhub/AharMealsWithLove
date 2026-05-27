@@ -1,0 +1,66 @@
+@{ ViewData["Title"] = "Deliver Food";
+   var spots = ViewBag.Spots as List<Dictionary<string,string>>;
+   var vols = ViewBag.Volunteers as List<Dictionary<string,string>>;
+   var vehs = ViewBag.Vehicles as List<Dictionary<string,string>>;
+}
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-box-open text-success me-2"></i>Food Delivery Management</h3>
+    @if(TempData["DeliveryMsg"] != null){ <div class="alert alert-success"><i class="fa fa-check-circle me-2"></i>@TempData["DeliveryMsg"]</div> }
+
+    <form asp-action="DeliverFood" method="post">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="ahar-card p-3 h-100">
+            <h6 class="fw-bold mb-3"><i class="fa fa-map-marker-alt text-warning me-2"></i>Select Ahar Spot</h6>
+            <select name="spotId" class="form-select form-select-lg">
+              <option value="0">-- Select Spot --</option>
+              @if(spots != null){ foreach(var s in spots){
+                <option value="@s["ID"]">@s.GetValueOrDefault("type","–") – @s.GetValueOrDefault("address","–")</option>
+              }}
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="ahar-card p-3 h-100">
+            <h6 class="fw-bold mb-3"><i class="fa fa-hands-helping text-info me-2"></i>Assign Volunteer</h6>
+            <select name="volId" class="form-select form-select-lg">
+              <option value="0">-- Select Volunteer --</option>
+              @if(vols != null){ foreach(var v in vols){
+                <option value="@v["ID"]">@v.GetValueOrDefault("Name","–") (@v.GetValueOrDefault("Phone","–"))</option>
+              }}
+            </select>
+            @if(vols == null || vols.Count == 0){ <p class="text-warning small mt-2"><i class="fa fa-exclamation-triangle me-1"></i>No available volunteers.</p> }
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="ahar-card p-3 h-100">
+            <h6 class="fw-bold mb-3"><i class="fa fa-car text-warning me-2"></i>Assign Vehicle</h6>
+            <select name="vehId" class="form-select form-select-lg">
+              <option value="0">-- Select Vehicle --</option>
+              @if(vehs != null){ foreach(var v in vehs){
+                <option value="@v["ID"]">@v.GetValueOrDefault("Vehicle_no","–") – @v.GetValueOrDefault("owner_name","–")</option>
+              }}
+            </select>
+          </div>
+        </div>
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-success btn-lg px-5"><i class="fa fa-paper-plane me-2"></i>Assign Delivery</button>
+        </div>
+      </div>
+    </form>
+
+    <h5 class="fw-bold mt-4 mb-3">All Ahar Spots</h5>
+    <div class="row g-3">
+      @if(spots != null){ foreach(var s in spots){
+        <div class="col-md-4"><div class="ahar-card p-3">
+          <div class="d-flex align-items-center mb-2"><span class="badge bg-warning text-dark me-2">@s.GetValueOrDefault("category","–")</span></div>
+          <div class="fw-bold">@s.GetValueOrDefault("type","–")</div>
+          <div class="text-muted small"><i class="fa fa-map-marker-alt me-1"></i>@s.GetValueOrDefault("address","–")</div>
+          <div class="text-muted small"><i class="fa fa-users me-1"></i>~@s.GetValueOrDefault("nopeople","–") people</div>
+        </div></div>
+      }} else { <div class="col-12"><div class="alert alert-info">No Ahar Spots added yet.</div></div> }
+    </div>
+  </div>
+</div></div>

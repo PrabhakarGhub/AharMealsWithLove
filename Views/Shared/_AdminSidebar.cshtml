@@ -1,0 +1,30 @@
+<div class="col-md-2 d-none d-md-block dash-sidebar">
+  <div class="text-center py-3 border-bottom border-secondary mb-2">
+    <i class="fa fa-shield-alt fa-2x text-danger"></i>
+    <div class="text-white small mt-1 fw-bold">Admin Panel</div>
+  </div>
+  <nav class="nav flex-column">
+    <a class="nav-link" asp-controller="Admin" asp-action="Dashboard"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+    <div class="nav-link text-secondary small fw-bold px-3 pt-2">USERS</div>
+    <a class="nav-link" asp-controller="Admin" asp-action="Users"><i class="fa fa-users me-2"></i>All Users</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="Volunteers"><i class="fa fa-hands-helping me-2"></i>Volunteers</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="Hotels"><i class="fa fa-hotel me-2"></i>Hotels</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="AddHotel"><i class="fa fa-plus me-2"></i>Add Hotel</a>
+    <div class="nav-link text-secondary small fw-bold px-3 pt-2">PICKUPS</div>
+    <a class="nav-link" asp-controller="Admin" asp-action="NewPickup"><i class="fa fa-truck me-2"></i>Manage Pickups</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="HotelPickups"><i class="fa fa-hotel me-2"></i>Hotel Pickups</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="DeliverFood"><i class="fa fa-box-open me-2"></i>Deliver Food</a>
+    <div class="nav-link text-secondary small fw-bold px-3 pt-2">MANAGE</div>
+    <a class="nav-link" asp-controller="Admin" asp-action="AharSpots"><i class="fa fa-map-marker-alt me-2"></i>Ahar Spots</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="AddAharSpot"><i class="fa fa-plus me-2"></i>Add Spot</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="Vehicles"><i class="fa fa-car me-2"></i>Vehicles</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="AddVehicle"><i class="fa fa-plus me-2"></i>Add Vehicle</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="PostInfo"><i class="fa fa-bullhorn me-2"></i>Post Info</a>
+    <div class="nav-link text-secondary small fw-bold px-3 pt-2">REPORTS</div>
+    <a class="nav-link" asp-controller="Admin" asp-action="Donations"><i class="fa fa-donate me-2"></i>Donations</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="Feedback"><i class="fa fa-comment me-2"></i>Feedback</a>
+    <a class="nav-link" asp-controller="Admin" asp-action="ContactInfo"><i class="fa fa-envelope me-2"></i>Contact Msgs</a>
+    <hr class="border-secondary"/>
+    <a class="nav-link text-danger" asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+  </nav>
+</div>

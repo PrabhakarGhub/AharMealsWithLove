@@ -1,0 +1,14 @@
+@{ ViewData["Title"] = "Ahar Team"; }
+<div class="page-header"><div class="container"><h1><i class="fa fa-users me-3 text-warning"></i>Ahar Team</h1></div></div>
+<div class="container pb-5">
+  <div class="row g-4 justify-content-center">
+    @foreach(var m in new[]{("Vinay","Founder & CEO","fa-user-tie"),("Anushka","Operations Head","fa-user"),("Smriti","Volunteer Coordinator","fa-user"),("Nishant","Tech Lead","fa-user-cog")}){
+      <div class="col-6 col-md-3">
+        <div class="ahar-card text-center p-4">
+          <div class="rounded-circle bg-warning d-inline-flex align-items-center justify-content-center mb-3" style="width:80px;height:80px;"><i class="fa @m.Item3 fa-2x text-dark"></i></div>
+          <h5 class="fw-bold">@m.Item1</h5><p class="text-muted small">@m.Item2</p>
+        </div>
+      </div>
+    }
+  </div>
+</div>

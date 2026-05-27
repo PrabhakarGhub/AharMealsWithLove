@@ -1,0 +1,23 @@
+@{ ViewData["Title"] = "Availability"; string cur = ViewBag.CurrentStatus ?? "unavailable"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_VolSidebar")
+  <div class="col-md-10 py-4"><div class="row justify-content-center"><div class="col-md-5">
+    <h3 class="fw-bold mb-4"><i class="fa fa-calendar-check text-info me-2"></i>My Availability</h3>
+    @if(ViewBag.Message != null && ViewBag.Message.ToString() != ""){ <div class="alert alert-success">@ViewBag.Message</div> }
+    <div class="ahar-card p-4">
+      <p class="mb-3">Current Status: <span class="badge badge-@cur fw-bold fs-6">@cur</span></p>
+      <form asp-action="Availability" method="post">
+        <div class="mb-3"><label class="form-label fw-bold">Update Status</label>
+          <select name="status" class="form-select form-select-lg">
+            @Html.Raw(cur == "available"
+              ? "<option value='available' selected>Available</option><option value='unavailable'>Unavailable</option><option value='busy'>Busy</option>"
+              : cur == "busy"
+              ? "<option value='available'>Available</option><option value='unavailable'>Unavailable</option><option value='busy' selected>Busy</option>"
+              : "<option value='available'>Available</option><option value='unavailable' selected>Unavailable</option><option value='busy'>Busy</option>")
+          </select>
+        </div>
+        <button type="submit" class="btn btn-info text-white btn-lg w-100"><i class="fa fa-save me-2"></i>Update Status</button>
+      </form>
+    </div>
+  </div></div></div>
+</div></div>

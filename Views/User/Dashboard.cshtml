@@ -1,0 +1,21 @@
+@{ ViewData["Title"] = "User Dashboard"; }
+<div class="container-fluid">
+<div class="row">
+  @await Html.PartialAsync("_UserSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-home text-warning me-2"></i>Welcome, @(Context.Session.GetString("uname") ?? "User")</h3>
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3"><div class="dash-stat"><i class="fa fa-truck fa-2x text-warning mb-2"></i><h4 class="fw-bold">Pickup</h4><a asp-action="FoodPickup" class="btn btn-sm btn-ahar mt-1">Request Now</a></div></div>
+      <div class="col-6 col-md-3"><div class="dash-stat"><i class="fa fa-donate fa-2x text-success mb-2"></i><h4 class="fw-bold">Donate</h4><a asp-action="Donate" class="btn btn-sm btn-success mt-1">Donate</a></div></div>
+      <div class="col-6 col-md-3"><div class="dash-stat"><i class="fa fa-birthday-cake fa-2x text-info mb-2"></i><h4 class="fw-bold">Birthday</h4><a asp-action="ShareBirthday" class="btn btn-sm btn-info text-white mt-1">Share</a></div></div>
+      <div class="col-6 col-md-3"><div class="dash-stat"><i class="fa fa-comment fa-2x text-danger mb-2"></i><h4 class="fw-bold">Feedback</h4><a asp-action="Feedback" class="btn btn-sm btn-danger mt-1">Submit</a></div></div>
+    </div>
+    <h5 class="fw-bold mb-3"><i class="fa fa-bell text-warning me-2"></i>Latest Information</h5>
+    <div id="infoFeed">
+      @if(ViewBag.InfoFeed != null){ foreach(var info in (List<Dictionary<string,string>>)ViewBag.InfoFeed){
+        <div class="alert alert-ahar mb-2"><strong>@info.GetValueOrDefault("Subject","–")</strong><p class="mb-0 text-muted small">@info.GetValueOrDefault("Details","–")</p></div>
+      }} else { <p class="text-muted">No information available.</p> }
+    </div>
+  </div>
+</div>
+</div>

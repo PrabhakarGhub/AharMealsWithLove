@@ -1,0 +1,21 @@
+@{ ViewData["Title"] = "Hotel Dashboard"; var picks = ViewBag.Pickups as List<Dictionary<string,string>>; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_HotelSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-hotel text-success me-2"></i>Hotel Dashboard – @ViewBag.HotelName</h3>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4"><div class="dash-stat text-center"><i class="fa fa-truck fa-2x text-success mb-2"></i><h5>Request Pickup</h5><a asp-action="FoodPickup" class="btn btn-success mt-2">New Request</a></div></div>
+      <div class="col-md-4"><div class="dash-stat text-center"><i class="fa fa-list fa-2x text-warning mb-2"></i><h5>Total Requests</h5><h2 class="fw-bold text-warning">@(picks?.Count ?? 0)</h2></div></div>
+      <div class="col-md-4"><div class="dash-stat text-center"><i class="fa fa-check-circle fa-2x text-primary mb-2"></i><h5>Accepted</h5><h2 class="fw-bold text-primary">@(picks?.Count(p=>p.GetValueOrDefault("status","")=="Accept") ?? 0)</h2></div></div>
+    </div>
+    <h5 class="fw-bold mb-3">My Pickup Requests</h5>
+    <div class="ahar-card p-3">
+      @if(picks != null && picks.Count > 0){
+        <div class="table-responsive"><table class="table ahar-table">
+          <thead><tr><th>#</th><th>Event</th><th>Venue</th><th>Date</th><th>Qty</th><th>Status</th></tr></thead>
+          <tbody>@foreach(var p in picks){<tr><td>@p["ID"]</td><td>@p.GetValueOrDefault("eventdetail","–")</td><td>@p.GetValueOrDefault("venue","–")</td><td>@p.GetValueOrDefault("date","–")</td><td>@p.GetValueOrDefault("quantity","–")</td><td><span class="badge badge-@p.GetValueOrDefault("status","submitted").ToLower()">@p.GetValueOrDefault("status","–")</span></td></tr>}</tbody>
+        </table></div>
+      } else { <div class="alert alert-info">No pickup requests yet.</div> }
+    </div>
+  </div>
+</div></div>

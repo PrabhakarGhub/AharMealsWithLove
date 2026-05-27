@@ -1,0 +1,17 @@
+@model AharMealsWithLove.Models.DonationViewModel
+@{ ViewData["Title"] = "Payment Summary"; }
+<div class="page-header"><div class="container"><h1><i class="fa fa-file-invoice me-3 text-warning"></i>Payment Summary</h1></div></div>
+<div class="container pb-5"><div class="row justify-content-center"><div class="col-md-6">
+  <div class="receipt-card">
+    <div class="receipt-header text-center"><i class="fa fa-file-invoice fa-2x mb-2"></i><h4 class="fw-bold">Order Summary</h4></div>
+    <div class="p-4"><table class="table">
+      <tr><th>Billing Address:</th><td>@Model.BillingAddress</td></tr>
+      <tr><th>Service:</th><td>@Model.ServiceType</td></tr>
+      <tr><th>Amount:</th><td>₹@Model.Amount</td></tr>
+      <tr><th>Additional Charges:</th><td>₹0</td></tr>
+      <tr class="table-warning"><th><strong>Total:</strong></th><td><strong>₹@Model.TotalAmount</strong></td></tr>
+    </table>
+    <a asp-controller="User" asp-action="PaymentMethod" class="btn btn-ahar btn-lg w-100 mt-2"><i class="fa fa-credit-card me-2"></i>Proceed to Payment</a>
+    </div>
+  </div>
+</div></div></div>

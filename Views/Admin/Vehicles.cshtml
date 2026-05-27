@@ -1,0 +1,23 @@
+@model List<Dictionary<string,string>>
+@{ ViewData["Title"] = "Vehicles"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="fw-bold mb-0"><i class="fa fa-car text-warning me-2"></i>Vehicles <span class="badge bg-secondary">@Model.Count</span></h3>
+      <a asp-action="AddVehicle" class="btn btn-ahar"><i class="fa fa-plus me-2"></i>Add Vehicle</a>
+    </div>
+    <div class="ahar-card p-3">
+      <div class="table-responsive"><table class="table ahar-table">
+        <thead><tr><th>#</th><th>Vehicle No</th><th>Owner</th><th>Father/Mother</th><th>UID No</th><th>Contact</th><th>Email</th></tr></thead>
+        <tbody>
+          @if(Model.Count > 0){ foreach(var v in Model){
+            <tr><td>@v.GetValueOrDefault("ID","–")</td><td>@v.GetValueOrDefault("Vehicle_no","–")</td><td>@v.GetValueOrDefault("owner_name","–")</td>
+            <td>@v.GetValueOrDefault("F_name","–")</td><td>@v.GetValueOrDefault("Uid_no","–")</td>
+            <td>@v.GetValueOrDefault("Contact","–")</td><td>@v.GetValueOrDefault("Email","–")</td></tr>
+          }} else { <tr><td colspan="7" class="text-center text-muted">No vehicles registered.</td></tr> }
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div></div>

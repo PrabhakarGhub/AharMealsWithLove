@@ -1,0 +1,22 @@
+@model AharMealsWithLove.Models.VehicleViewModel
+@{ ViewData["Title"] = "Add Vehicle"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-car text-warning me-2"></i>Register Vehicle</h3>
+    @if(Model.Message != null){ <div class="alert alert-success"><i class="fa fa-check-circle me-2"></i>@Model.Message</div> }
+    <div class="ahar-card p-4">
+      <form asp-action="AddVehicle" method="post">
+        <div class="row g-3">
+          <div class="col-md-6"><label class="form-label fw-bold">Vehicle Number</label><input asp-for="VehicleNo" class="form-control form-control-lg" placeholder="e.g. JH01AB1234"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Owner Name</label><input asp-for="OwnerName" class="form-control form-control-lg" placeholder="Owner full name"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Father's / Mother's Name</label><input asp-for="FatherName" class="form-control form-control-lg" placeholder="Father/Mother name"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">UID Number</label><input asp-for="UidNo" class="form-control form-control-lg" placeholder="Aadhar/UID number"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Contact Number</label><input asp-for="Contact" class="form-control form-control-lg" placeholder="Phone number"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Email</label><input asp-for="Email" class="form-control form-control-lg" placeholder="Email address"/></div>
+          <div class="col-12"><button type="submit" class="btn btn-ahar btn-lg px-5"><i class="fa fa-save me-2"></i>Register Vehicle</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div></div>

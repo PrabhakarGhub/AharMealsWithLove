@@ -1,0 +1,20 @@
+@model List<Dictionary<string,string>>
+@{ ViewData["Title"] = "Volunteers"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-hands-helping text-info me-2"></i>Volunteers <span class="badge bg-secondary">@Model.Count</span></h3>
+    <div class="ahar-card p-3">
+      <div class="table-responsive"><table class="table ahar-table">
+        <thead><tr><th>#</th><th>Email</th><th>Name</th><th>Gender</th><th>Phone</th><th>Status</th></tr></thead>
+        <tbody>
+          @if(Model.Count > 0){ foreach(var v in Model){
+            <tr><td>@v.GetValueOrDefault("ID","–")</td><td>@v.GetValueOrDefault("Email","–")</td><td>@v.GetValueOrDefault("Name","–")</td>
+            <td>@v.GetValueOrDefault("Gender","–")</td><td>@v.GetValueOrDefault("Phone","–")</td>
+            <td><span class="badge badge-@v.GetValueOrDefault("availstat","unavailable")">@v.GetValueOrDefault("availstat","unavailable")</span></td></tr>
+          }} else { <tr><td colspan="6" class="text-center text-muted">No volunteers yet.</td></tr> }
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div></div>

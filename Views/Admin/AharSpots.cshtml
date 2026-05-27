@@ -1,0 +1,21 @@
+@model List<Dictionary<string,string>>
+@{ ViewData["Title"] = "Ahar Spots"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="fw-bold mb-0"><i class="fa fa-map-marker-alt text-warning me-2"></i>Ahar Spots <span class="badge bg-secondary">@Model.Count</span></h3>
+      <a asp-action="AddAharSpot" class="btn btn-ahar"><i class="fa fa-plus me-2"></i>Add Spot</a>
+    </div>
+    <div class="row g-3">
+      @if(Model.Count > 0){ foreach(var s in Model){
+        <div class="col-md-4"><div class="ahar-card p-3">
+          <span class="badge bg-warning text-dark mb-2">@s.GetValueOrDefault("category","–")</span>
+          <h6 class="fw-bold">@s.GetValueOrDefault("type","–")</h6>
+          <p class="text-muted small mb-1"><i class="fa fa-map-marker-alt me-1"></i>@s.GetValueOrDefault("address","–")</p>
+          <p class="text-muted small mb-0"><i class="fa fa-users me-1"></i>~@s.GetValueOrDefault("nopeople","–") people</p>
+        </div></div>
+      }} else { <div class="col-12"><div class="alert alert-info text-center">No Ahar Spots yet. <a asp-action="AddAharSpot" class="alert-link">Add one now</a>.</div></div> }
+    </div>
+  </div>
+</div></div>

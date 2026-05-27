@@ -1,0 +1,19 @@
+@{ ViewData["Title"] = "Complaint Status"; var results = ViewBag.Results as List<Dictionary<string,string>>; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_UserSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-search text-warning me-2"></i>Check Complaint Status</h3>
+    <div class="ahar-card p-4">
+      <form asp-action="FeedbackStatus" method="get">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-6"><label class="form-label fw-bold">Enter Ticket #</label><input name="ticket" value="@ViewBag.Ticket" class="form-control form-control-lg" placeholder="Your ticket number"/></div>
+          <div class="col-md-2"><button type="submit" class="btn btn-ahar btn-lg w-100"><i class="fa fa-search"></i> Search</button></div>
+        </div>
+      </form>
+      @if(results != null && results.Count > 0){
+        <div class="table-responsive mt-4"><table class="table ahar-table"><thead><tr><th>Ticket #</th><th>Status</th></tr></thead>
+        <tbody>@foreach(var r in results){ <tr><td>@r.GetValueOrDefault("Ticket","–")</td><td><span class="badge badge-@r.GetValueOrDefault("Status","submitted").ToLower()">@r.GetValueOrDefault("Status","–")</span></td></tr> }</tbody></table></div>
+      } else if(ViewBag.Ticket != ""){ <div class="alert alert-warning mt-3">No complaint found for ticket #@ViewBag.Ticket</div> }
+    </div>
+  </div>
+</div></div>

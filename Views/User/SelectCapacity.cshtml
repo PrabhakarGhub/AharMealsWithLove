@@ -1,0 +1,26 @@
+@model AharMealsWithLove.Models.BirthdayViewModel
+@{ ViewData["Title"] = "Select Capacity"; }
+<div class="page-header"><div class="container"><h1><i class="fa fa-users me-3 text-warning"></i>Select Capacity</h1></div></div>
+<div class="container pb-5"><div class="row justify-content-center"><div class="col-md-6">
+  <div class="ahar-card p-4">
+    <h4 class="fw-bold mb-4 text-center">How many people do you want to feed?</h4>
+    <form asp-action="SelectCapacity" method="post">
+      <div class="row g-3 mb-4">
+        @foreach(var c in new[]{("100","3,500"),("200","7,000"),("300","10,500")}){
+          <div class="col-4"><label class="w-100"><input type="radio" name="Capacity" value="@c.Item1" class="d-none capacity-radio"/>
+            <div class="capacity-option ahar-card p-3 text-center" style="cursor:pointer;border:2px solid transparent;">
+              <div class="fw-bold fs-4">@c.Item1</div><div class="small text-muted">people</div><div class="fw-bold text-warning mt-1">₹@c.Item2</div>
+            </div></label>
+          </div>
+        }
+      </div>
+      <button type="submit" class="btn btn-ahar btn-lg w-100"><i class="fa fa-arrow-right me-2"></i>Proceed to Payment</button>
+    </form>
+  </div>
+</div></div></div>
+@section Scripts {<script>
+document.querySelectorAll('.capacity-radio').forEach(r => r.addEventListener('change', function(){
+  document.querySelectorAll('.capacity-option').forEach(o => o.style.borderColor='transparent');
+  this.nextElementSibling.style.borderColor='#f25f34';
+}));
+</script>}

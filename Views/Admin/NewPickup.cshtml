@@ -1,0 +1,95 @@
+@{ ViewData["Title"] = "Manage Pickups";
+   var userPicks = ViewBag.UserPickups as List<Dictionary<string,string>>;
+   var hotelPicks = ViewBag.HotelPickups as List<Dictionary<string,string>>;
+   var vols = ViewBag.Volunteers as List<Dictionary<string,string>>;
+   var vehs = ViewBag.Vehicles as List<Dictionary<string,string>>;
+}
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-truck text-warning me-2"></i>Manage Pickup Requests</h3>
+
+    <ul class="nav nav-tabs mb-4" id="pickupTabs">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#userTab"><i class="fa fa-user me-2"></i>User Pickups (@(userPicks?.Count ?? 0))</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#hotelTab"><i class="fa fa-hotel me-2"></i>Hotel Pickups (@(hotelPicks?.Count ?? 0))</button></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="userTab">
+        <div class="ahar-card p-3">
+          @if(userPicks != null && userPicks.Count > 0){
+            <div class="table-responsive"><table class="table ahar-table">
+              <thead><tr><th>#</th><th>User</th><th>Event</th><th>Venue</th><th>Date</th><th>Qty</th><th>Cat</th><th>Cook Time</th><th>Exp Time</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody>@foreach(var p in userPicks){
+                <tr>
+                  <td>@p["ID"]</td><td>@p.GetValueOrDefault("uname","–")</td><td>@p.GetValueOrDefault("eventdetail","–")</td>
+                  <td>@p.GetValueOrDefault("venue","–")</td><td>@p.GetValueOrDefault("date","–")</td>
+                  <td>@p.GetValueOrDefault("quantity","–")</td><td>@p.GetValueOrDefault("category","–")</td>
+                  <td>@p.GetValueOrDefault("cooktime","–")</td><td>@p.GetValueOrDefault("exptime","–")</td>
+                  <td><span class="badge badge-@p.GetValueOrDefault("status","submitted").ToLower()">@p.GetValueOrDefault("status","–")</span></td>
+                  <td>
+                    <form asp-action="UpdatePickupStatus" method="post" class="d-flex gap-1">
+                      <input type="hidden" name="id" value="@p["ID"]"/>
+                      <button name="status" value="Accept" class="btn btn-xs btn-success" style="font-size:.75rem;padding:.2rem .5rem;">✓</button>
+                      <button name="status" value="Reject" class="btn btn-xs btn-danger" style="font-size:.75rem;padding:.2rem .5rem;">✗</button>
+                    </form>
+                  </td>
+                </tr>
+              }</tbody>
+            </table></div>
+          } else { <div class="alert alert-info text-center">No pending user pickup requests.</div> }
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="hotelTab">
+        <div class="ahar-card p-3">
+          @if(hotelPicks != null && hotelPicks.Count > 0){
+            <div class="table-responsive"><table class="table ahar-table">
+              <thead><tr><th>#</th><th>Hotel</th><th>Event</th><th>Venue</th><th>Date</th><th>Qty</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody>@foreach(var p in hotelPicks){
+                <tr>
+                  <td>@p["ID"]</td><td>@p.GetValueOrDefault("uname","–")</td><td>@p.GetValueOrDefault("eventdetail","–")</td>
+                  <td>@p.GetValueOrDefault("venue","–")</td><td>@p.GetValueOrDefault("date","–")</td>
+                  <td>@p.GetValueOrDefault("quantity","–")</td>
+                  <td><span class="badge badge-@p.GetValueOrDefault("status","submitted").ToLower()">@p.GetValueOrDefault("status","–")</span></td>
+                  <td>
+                    <form asp-action="UpdateHotelPickupStatus" method="post" class="d-flex gap-1">
+                      <input type="hidden" name="id" value="@p["ID"]"/>
+                      <button name="status" value="Accept" class="btn btn-xs btn-success" style="font-size:.75rem;padding:.2rem .5rem;">✓</button>
+                      <button name="status" value="Reject" class="btn btn-xs btn-danger" style="font-size:.75rem;padding:.2rem .5rem;">✗</button>
+                    </form>
+                  </td>
+                </tr>
+              }</tbody>
+            </table></div>
+          } else { <div class="alert alert-info text-center">No pending hotel pickup requests.</div> }
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mt-3">
+      <div class="col-md-6">
+        <div class="ahar-card p-3">
+          <h6 class="fw-bold mb-3"><i class="fa fa-hands-helping text-info me-2"></i>Available Volunteers</h6>
+          @if(vols != null && vols.Count > 0){
+            <div class="table-responsive"><table class="table table-sm">
+              <thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Status</th></tr></thead>
+              <tbody>@foreach(var v in vols){<tr><td>@v["ID"]</td><td>@v.GetValueOrDefault("Name","–")</td><td>@v.GetValueOrDefault("Phone","–")</td><td><span class="badge badge-available">Available</span></td></tr>}</tbody>
+            </table></div>
+          } else { <p class="text-muted small">No available volunteers right now.</p> }
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="ahar-card p-3">
+          <h6 class="fw-bold mb-3"><i class="fa fa-car text-warning me-2"></i>Registered Vehicles</h6>
+          @if(vehs != null && vehs.Count > 0){
+            <div class="table-responsive"><table class="table table-sm">
+              <thead><tr><th>#</th><th>Vehicle No</th><th>Owner</th><th>Contact</th></tr></thead>
+              <tbody>@foreach(var v in vehs){<tr><td>@v["ID"]</td><td>@v.GetValueOrDefault("Vehicle_no","–")</td><td>@v.GetValueOrDefault("owner_name","–")</td><td>@v.GetValueOrDefault("Contact","–")</td></tr>}</tbody>
+            </table></div>
+          } else { <p class="text-muted small">No vehicles registered.</p> }
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>

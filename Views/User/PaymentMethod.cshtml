@@ -1,0 +1,18 @@
+@model AharMealsWithLove.Models.PaymentViewModel
+@{ ViewData["Title"] = "Payment Method"; }
+<div class="page-header"><div class="container"><h1><i class="fa fa-credit-card me-3 text-warning"></i>Choose Payment Method</h1></div></div>
+<div class="container pb-5"><div class="row justify-content-center"><div class="col-md-6">
+  <div class="ahar-card p-4">
+    <form asp-action="PaymentMethod" method="post">
+      <div class="row g-3 mb-4">
+        @foreach(var m in new[]{("Debit/Credit Card","fa-credit-card","warning"),("Paytm Wallet","fa-mobile","info"),("UPI","fa-qrcode","success"),("Net Banking","fa-university","primary")}){
+          <div class="col-6"><label class="w-100"><input type="radio" name="Method" value="@m.Item1" class="d-none"/>
+            <div class="ahar-card p-3 text-center pay-method" style="cursor:pointer;"><i class="fa @m.Item2 fa-2x text-@m.Item3 mb-2"></i><div class="small fw-bold">@m.Item1</div></div>
+          </label></div>
+        }
+      </div>
+      <button type="submit" class="btn btn-ahar btn-lg w-100"><i class="fa fa-lock me-2"></i>Confirm and Pay</button>
+    </form>
+  </div>
+</div></div></div>
+@section Scripts{<script>document.querySelectorAll('[type=radio]').forEach(r=>r.addEventListener('change',function(){document.querySelectorAll('.pay-method').forEach(m=>m.style.outline='none');this.nextElementSibling.style.outline='3px solid #f25f34';}));</script>}

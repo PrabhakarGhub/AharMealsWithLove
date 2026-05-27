@@ -1,0 +1,34 @@
+@model AharMealsWithLove.Models.ContactViewModel
+@{ ViewData["Title"] = "Contact Us"; }
+<div class="page-header"><div class="container"><h1><i class="fa fa-envelope me-3 text-warning"></i>Contact Us</h1></div></div>
+<div class="container pb-5">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="ahar-card p-4 h-100">
+        <h5 class="fw-bold text-warning"><i class="fa fa-phone me-2"></i>Help Line</h5>
+        <h4 class="fw-bold my-3">80923 08696</h4>
+        <hr/>
+        <h5 class="fw-bold text-warning"><i class="fa fa-clock me-2"></i>Hours</h5>
+        <p>ALL DAYS: 9:00am to 10:00pm</p>
+        <hr/>
+        <h5 class="fw-bold text-warning"><i class="fa fa-map-marker-alt me-2"></i>Address</h5>
+        <p>Ahar Meals with Love<br/>Block 2, Ranchi Tech Zone,<br/>Main Road, Ranchi – 834001</p>
+        <hr/>
+        <h5 class="fw-bold text-warning"><i class="fa fa-envelope me-2"></i>Email</h5>
+        <p>ahar.in@gmail.com</p>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="ahar-card p-4">
+        <h4 class="fw-bold mb-4">Send Us a Message</h4>
+        @if(Model.SuccessMessage != null){ <div class="alert alert-success"><i class="fa fa-check-circle me-2"></i>@Model.SuccessMessage</div> }
+        <form asp-action="Contact" method="post">
+          <div class="mb-3"><label class="form-label fw-bold">Your Name</label><input asp-for="Name" class="form-control form-control-lg" placeholder="Enter your name"/><span asp-validation-for="Name" class="text-danger small"></span></div>
+          <div class="mb-3"><label class="form-label fw-bold">Your Email</label><input asp-for="Email" class="form-control form-control-lg" placeholder="Enter your email"/><span asp-validation-for="Email" class="text-danger small"></span></div>
+          <div class="mb-3"><label class="form-label fw-bold">Message</label><textarea asp-for="Message" class="form-control" rows="5" placeholder="Type your message here..."></textarea><span asp-validation-for="Message" class="text-danger small"></span></div>
+          <button type="submit" class="btn btn-ahar btn-lg w-100"><i class="fa fa-paper-plane me-2"></i>Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+@{ ViewData["Title"] = "Gallery"; }
+<div class="page-header"><div class="container"><h1><i class="fa fa-images me-3 text-warning"></i>Gallery</h1></div></div>
+<div class="container pb-5">
+  <div class="row g-3">
+    @foreach(var g in new[]{("Food Distribution","fa-utensils"),("Orphanage Delivery","fa-child"),("Ahar Rath","fa-truck"),("Volunteer Distribution","fa-hands-helping"),("Ahar ATM","fa-money-bill"),("Awareness Program","fa-bullhorn"),("Marathon Event","fa-running"),("Birthday Celebration","fa-birthday-cake")}){
+      <div class="col-6 col-md-3">
+        <div class="gallery-item" style="background:linear-gradient(135deg,#f25f34,#1a1a2e);height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+          <i class="fa @g.Item2 fa-3x text-white mb-2"></i>
+          <span class="text-white fw-bold">@g.Item1</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

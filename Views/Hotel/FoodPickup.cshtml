@@ -1,0 +1,24 @@
+@model AharMealsWithLove.Models.PickupRequest
+@{ ViewData["Title"] = "Hotel Pickup Request"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_HotelSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-truck text-success me-2"></i>Hotel Food Pickup Request</h3>
+    @if(Model.Message != null){ <div class="alert alert-success"><i class="fa fa-check-circle me-2"></i>@Model.Message</div> }
+    <div class="ahar-card p-4">
+      <form asp-action="FoodPickup" method="post">
+        <div class="row g-3">
+          <div class="col-md-6"><label class="form-label fw-bold">Event Details</label><input asp-for="EventDetail" class="form-control form-control-lg" placeholder="Event details"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Venue</label><input asp-for="Venue" class="form-control form-control-lg" placeholder="Hotel / Venue address"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Date</label><input asp-for="Date" type="date" class="form-control form-control-lg"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Food Category</label><select asp-for="Category" class="form-select form-select-lg"><option value="veg">Vegetarian</option><option value="nonveg">Non-Vegetarian</option><option value="both">Both</option></select></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Quantity</label><input asp-for="Quantity" class="form-control form-control-lg" placeholder="No. of plates"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Cook Time</label><input asp-for="CookTime" class="form-control form-control-lg" placeholder="e.g. 2:00 PM"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Expiry Time</label><input asp-for="ExpTime" class="form-control form-control-lg" placeholder="e.g. 8:00 PM"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Area Code</label><select asp-for="AreaCode" class="form-select form-select-lg"><option>110</option><option>112</option><option>114</option></select></div>
+          <div class="col-12"><button type="submit" class="btn btn-success btn-lg px-5"><i class="fa fa-paper-plane me-2"></i>Submit Request</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div></div>

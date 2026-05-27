@@ -1,0 +1,19 @@
+@model List<Dictionary<string,string>>
+@{ ViewData["Title"] = "Contact Messages"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-envelope text-warning me-2"></i>Contact Messages <span class="badge bg-secondary">@Model.Count</span></h3>
+    <div class="ahar-card p-3">
+      <div class="table-responsive"><table class="table ahar-table">
+        <thead><tr><th>#</th><th>Name</th><th>Contact/Email</th><th>Message</th><th>Date</th></tr></thead>
+        <tbody>
+          @if(Model.Count > 0){ foreach(var c in Model){
+            <tr><td>@c.GetValueOrDefault("ID","–")</td><td>@c.GetValueOrDefault("Name","–")</td><td>@c.GetValueOrDefault("Contact","–")</td>
+            <td style="max-width:250px;white-space:normal">@c.GetValueOrDefault("Message","–")</td><td>@c.GetValueOrDefault("Date","–")</td></tr>
+          }} else { <tr><td colspan="5" class="text-center text-muted">No messages yet.</td></tr> }
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div></div>

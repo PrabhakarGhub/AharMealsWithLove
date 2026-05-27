@@ -1,0 +1,58 @@
+@{ ViewData["Title"] = "Admin Dashboard"; }
+<div class="container-fluid">
+<div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-tachometer-alt text-danger me-2"></i>Admin Dashboard</h3>
+
+    <div class="row g-3 mb-4">
+      @{
+        var stats = new[]{
+          ("Total Users","fa-users","warning",ViewBag.TotalUsers?.ToString() ?? "0"),
+          ("Volunteers","fa-hands-helping","info",ViewBag.TotalVols?.ToString() ?? "0"),
+          ("Total Pickups","fa-truck","success",ViewBag.TotalPickups?.ToString() ?? "0"),
+          ("Pending Pickups","fa-clock","danger",ViewBag.PendingPickups?.ToString() ?? "0"),
+          ("Ahar Spots","fa-map-marker-alt","primary",ViewBag.TotalSpots?.ToString() ?? "0"),
+          ("Donations","fa-donate","secondary",ViewBag.TotalDonations?.ToString() ?? "0"),
+        };
+      }
+      @foreach(var s in stats){
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="dash-stat text-center" style="border-left-color:var(--bs-@s.Item3,#f25f34)">
+            <i class="fa @s.Item2 fa-2x text-@s.Item3 mb-2"></i>
+            <div class="fw-bold fs-4">@s.Item4</div>
+            <div class="text-muted small">@s.Item1</div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="ahar-card p-3 h-100">
+          <h6 class="fw-bold mb-3"><i class="fa fa-bolt text-warning me-2"></i>Quick Actions</h6>
+          <div class="d-grid gap-2">
+            <a asp-action="NewPickup" class="btn btn-ahar"><i class="fa fa-truck me-2"></i>Manage Pickup Requests</a>
+            <a asp-action="AddAharSpot" class="btn btn-outline-ahar"><i class="fa fa-map-marker-alt me-2"></i>Add New Ahar Spot</a>
+            <a asp-action="AddVehicle" class="btn btn-outline-ahar"><i class="fa fa-car me-2"></i>Register Vehicle</a>
+            <a asp-action="AddHotel" class="btn btn-outline-ahar"><i class="fa fa-hotel me-2"></i>Register Hotel</a>
+            <a asp-action="PostInfo" class="btn btn-outline-ahar"><i class="fa fa-bullhorn me-2"></i>Post Information</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="ahar-card p-3 h-100">
+          <h6 class="fw-bold mb-3"><i class="fa fa-chart-bar text-warning me-2"></i>Reports</h6>
+          <div class="d-grid gap-2">
+            <a asp-action="Users" class="btn btn-outline-secondary"><i class="fa fa-users me-2"></i>View All Users</a>
+            <a asp-action="Volunteers" class="btn btn-outline-secondary"><i class="fa fa-hands-helping me-2"></i>View Volunteers</a>
+            <a asp-action="Donations" class="btn btn-outline-secondary"><i class="fa fa-donate me-2"></i>Donation Reports</a>
+            <a asp-action="Feedback" class="btn btn-outline-secondary"><i class="fa fa-comment me-2"></i>User Feedback</a>
+            <a asp-action="ContactInfo" class="btn btn-outline-secondary"><i class="fa fa-envelope me-2"></i>Contact Messages</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

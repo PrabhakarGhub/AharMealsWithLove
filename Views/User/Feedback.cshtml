@@ -1,0 +1,38 @@
+@model AharMealsWithLove.Models.FeedbackViewModel
+@{ ViewData["Title"] = "Feedback"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_UserSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-comment text-warning me-2"></i>Feedback / Complaint</h3>
+    @if(Model.Message != null){
+      <div class="alert alert-success">
+        <i class="fa fa-check-circle me-2"></i>@Model.Message
+        @if(Model.Ticket.HasValue && Model.Ticket.Value > 0){
+          <br/>
+          <strong>Ticket #@Model.Ticket.Value</strong>
+          <span> - Use this number to track your complaint status.</span>
+        }
+      </div>
+    }
+    <div class="ahar-card p-4">
+      <form asp-action="Feedback" method="post">
+        <div class="row g-3">
+          <div class="col-md-6"><label class="form-label fw-bold">Type</label>
+            <select asp-for="Reason" class="form-select form-select-lg">
+              <option>Feedback</option><option>Suggestions</option><option>Complaint</option>
+            </select></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Regarding</label>
+            <select asp-for="ComplainFor" class="form-select form-select-lg">
+              <option>None (Suggestion/Feedback)</option><option>Pickup</option><option>Food Request</option><option>Others</option>
+            </select></div>
+          <div class="col-12"><label class="form-label fw-bold">Details</label>
+            <textarea asp-for="Detail" class="form-control" rows="5" placeholder="Describe your feedback or complaint..."></textarea></div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-ahar btn-lg px-5"><i class="fa fa-paper-plane me-2"></i>Submit</button>
+            <a asp-action="FeedbackStatus" class="btn btn-outline-ahar btn-lg ms-2"><i class="fa fa-search me-2"></i>Check Status</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div></div>

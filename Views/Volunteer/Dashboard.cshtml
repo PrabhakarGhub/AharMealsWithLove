@@ -1,0 +1,16 @@
+@{ ViewData["Title"] = "Volunteer Dashboard"; var vol = ViewBag.Vol as Dictionary<string,string>; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_VolSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-hands-helping text-info me-2"></i>Welcome, @(Context.Session.GetString("vname") ?? "Volunteer")</h3>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4"><div class="dash-stat"><i class="fa fa-calendar-check fa-2x text-info mb-2"></i><h5>Availability</h5><span class="badge badge-@(vol?.GetValueOrDefault("availstat","unavailable") ?? "unavailable")">@(vol?.GetValueOrDefault("availstat","unavailable") ?? "unavailable")</span><br/><a asp-action="Availability" class="btn btn-sm btn-info text-white mt-2">Update</a></div></div>
+      <div class="col-md-4"><div class="dash-stat"><i class="fa fa-truck fa-2x text-warning mb-2"></i><h5>Active Pickups</h5><a asp-action="MyPickups" class="btn btn-sm btn-warning mt-2">View</a></div></div>
+      <div class="col-md-4"><div class="dash-stat"><i class="fa fa-user fa-2x text-success mb-2"></i><h5>My Profile</h5><a asp-action="Profile" class="btn btn-sm btn-success mt-2">Edit</a></div></div>
+    </div>
+    <h5 class="fw-bold mb-3"><i class="fa fa-bell text-warning me-2"></i>Latest Updates</h5>
+    @foreach(var info in (List<Dictionary<string,string>>)(ViewBag.InfoFeed ?? new List<Dictionary<string,string>>())){
+      <div class="alert alert-ahar mb-2"><strong>@info.GetValueOrDefault("Subject","–")</strong><p class="mb-0 small text-muted">@info.GetValueOrDefault("Details","–")</p></div>
+    }
+  </div>
+</div></div>

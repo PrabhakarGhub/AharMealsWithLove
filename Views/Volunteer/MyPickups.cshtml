@@ -1,0 +1,16 @@
+@model List<Dictionary<string,string>>
+@{ ViewData["Title"] = "Active Pickups"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_VolSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-truck text-info me-2"></i>Active Pickup Assignments</h3>
+    <div class="ahar-card p-4">
+      @if(Model != null && Model.Count > 0){
+        <div class="table-responsive"><table class="table ahar-table">
+          <thead><tr><th>#</th><th>Event</th><th>Venue</th><th>Date</th><th>Qty</th><th>Category</th><th>Status</th></tr></thead>
+          <tbody>@foreach(var p in Model){ <tr><td>@p["ID"]</td><td>@p.GetValueOrDefault("eventdetail","–")</td><td>@p.GetValueOrDefault("venue","–")</td><td>@p.GetValueOrDefault("date","–")</td><td>@p.GetValueOrDefault("quantity","–")</td><td>@p.GetValueOrDefault("category","–")</td><td><span class="badge badge-accept">Accept</span></td></tr> }</tbody>
+        </table></div>
+      } else { <div class="alert alert-info text-center">No active pickup assignments yet.</div> }
+    </div>
+  </div>
+</div></div>

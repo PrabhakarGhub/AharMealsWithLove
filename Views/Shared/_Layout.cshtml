@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - AHAR: Meals with Love</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark ahar-nav fixed-top shadow">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Home" asp-action="Index">
+      <img src="~/img/logo.png" height="45" onerror="this.style.display='none'" alt=""/>
+      <span class="fw-bold text-warning" style="font-size:1.4rem;">AHAR</span>
+      <span class="text-white" style="font-size:.85rem;">Meals with Love</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">About</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-controller="Home" asp-action="HowItWorks">How it Works</a></li>
+            <li><a class="dropdown-item" asp-controller="Home" asp-action="Awards">Awards</a></li>
+            <li><a class="dropdown-item" asp-controller="Home" asp-action="Team">Ahar Team</a></li>
+            <li><a class="dropdown-item" asp-controller="Home" asp-action="FAQ">FAQ</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="AharATM">Ahar ATM</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Donation</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-controller="User" asp-action="Donate">Donate</a></li>
+            <li><a class="dropdown-item" asp-controller="User" asp-action="ShareBirthday">Share Your Birthday</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="AharSpots">Ahar Spots</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Gallery">Gallery</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Sign Up</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="UserSignup">User Sign Up</a></li>
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="VolunteerSignup">Volunteer Sign Up</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Login</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="UserLogin">User Login</a></li>
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="VolunteerLogin">Volunteer Login</a></li>
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="HotelLogin">Hotel Login</a></li>
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="AdminLogin">Admin Login</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a></li>
+        @if(Context.Session.GetString("umail") != null){
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-warning" href="#" data-bs-toggle="dropdown">
+              <i class="fa fa-user-circle"></i> @Context.Session.GetString("uname")
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" asp-controller="User" asp-action="Dashboard">Dashboard</a></li>
+              <li><a class="dropdown-item" asp-controller="User" asp-action="Profile">My Profile</a></li>
+              <li><a class="dropdown-item" asp-controller="User" asp-action="FoodPickup">Request Pickup</a></li>
+              <li><hr class="dropdown-divider"/></li>
+              <li><a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">Logout</a></li>
+            </ul>
+          </li>
+        }
+        @if(Context.Session.GetString("vmail") != null){
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-info" href="#" data-bs-toggle="dropdown">
+              <i class="fa fa-hands-helping"></i> @Context.Session.GetString("vname")
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" asp-controller="Volunteer" asp-action="Dashboard">Dashboard</a></li>
+              <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a></li>
+            </ul>
+          </li>
+        }
+        @if(Context.Session.GetString("adminId") != null){
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-danger" href="#" data-bs-toggle="dropdown">
+              <i class="fa fa-shield-alt"></i> Admin
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" asp-controller="Admin" asp-action="Dashboard">Dashboard</a></li>
+              <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a></li>
+            </ul>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div style="padding-top:70px;">
+  @RenderBody()
+</div>
+
+<footer class="ahar-footer mt-5 py-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5 class="text-warning fw-bold">About Us</h5>
+        <p class="text-light small">Ahar is a mission to end food waste and hunger to make the "World Hunger Free". We recover surplus food from weddings, parties and functions and donate it to needy people.</p>
+      </div>
+      <div class="col-md-4">
+        <h5 class="text-warning fw-bold">Hours Of Operation</h5>
+        <p class="text-light small"><b>ALL DAYS:</b> 9:00am to 10:00pm</p>
+        <p class="text-light small"><i class="fa fa-phone"></i> 80923 08696</p>
+        <p class="text-light small"><i class="fa fa-envelope"></i> ahar.in@gmail.com</p>
+      </div>
+      <div class="col-md-4">
+        <h5 class="text-warning fw-bold">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a class="text-light small text-decoration-none" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
+          <li><a class="text-light small text-decoration-none" asp-controller="Home" asp-action="TnC">Terms & Conditions</a></li>
+          <li><a class="text-light small text-decoration-none" asp-controller="Home" asp-action="Refund">Refund Policy</a></li>
+          <li><a class="text-light small text-decoration-none" asp-controller="Home" asp-action="FAQ">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-secondary"/>
+    <p class="text-center text-light small mb-0">&copy; 2023 Ahar - Meals with Love | Ranchi, Jharkhand</p>
+  </div>
+</footer>
+
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

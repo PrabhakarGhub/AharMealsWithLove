@@ -1,0 +1,142 @@
+@{ ViewData["Title"] = "Home"; }
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 text-white fade-in-up">
+        <span class="badge bg-warning text-dark badge-pill mb-3"><i class="fa fa-heart"></i> Food Recovery Network</span>
+        <h1>AHAR<br/><span class="text-warning">Meals with Love</span></h1>
+        <p class="lead text-light mt-3 mb-4">We connect individuals and businesses having excess food with people in need. Join us to fight hunger and reduce food waste across Jharkhand.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a asp-controller="Account" asp-action="UserSignup" class="btn btn-ahar btn-lg"><i class="fa fa-plus me-2"></i>Join Us</a>
+          <a asp-controller="User" asp-action="FoodPickup" class="btn btn-outline-light btn-lg"><i class="fa fa-truck me-2"></i>Request Pickup</a>
+          <a asp-controller="Home" asp-action="HowItWorks" class="btn btn-outline-warning btn-lg"><i class="fa fa-info-circle me-2"></i>How It Works</a>
+        </div>
+        <div class="mt-4">
+          <span class="badge bg-danger me-2"><i class="fa fa-phone"></i> Hotline: 80923 08696</span>
+          <span class="badge bg-success"><i class="fa fa-clock"></i> 9 AM – 10 PM Daily</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row g-4 text-center">
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa fa-users"></i></div>
+          <div class="stat-number">676,579</div>
+          <div class="stat-label">People Fed</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa fa-check-circle"></i></div>
+          <div class="stat-number">96%</div>
+          <div class="stat-label">Pickup Rate</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa fa-rupee-sign"></i></div>
+          <div class="stat-number">3.38 Cr</div>
+          <div class="stat-label">Revenue Saved (₹)</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa fa-leaf"></i></div>
+          <div class="stat-number">223 T</div>
+          <div class="stat-label">Food Saved (Tons)</div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <div class="alert alert-warning d-inline-block px-4 py-2 rounded-pill fw-bold">
+        <i class="fa fa-utensils me-2"></i>We serve an average of <span class="text-danger">900 people</span> every day!!
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS QUICK -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">How It Works</h2>
+      <p class="text-muted mt-3">Simple 4-step process to feed the needy</p>
+    </div>
+    <div class="row g-4">
+      @foreach(var step in new[]{
+        ("1", "fa-phone", "Call or Request", "Call 80923 08696 or submit a pickup request online for excess food."),
+        ("2", "fa-check-circle", "Quality Check", "Our staff/volunteers check food quality and transfer to dedicated vessels."),
+        ("3", "fa-map-marker-alt", "Locate Ahar Spot", "Recovery vehicle reaches nearest Ahar spot for distribution."),
+        ("4", "fa-hand-holding-heart", "Feed the Needy", "Food is distributed to hungry people at predefined spots.")
+      }){
+        <div class="col-6 col-md-3">
+          <div class="step-card">
+            <div class="step-number">@step.Item1</div>
+            <i class="fa @step.Item2 fa-2x text-warning mb-2"></i>
+            <h5 class="fw-bold">@step.Item3</h5>
+            <p class="text-muted small mb-0">@step.Item4</p>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="text-center mt-4">
+      <a asp-controller="Home" asp-action="HowItWorks" class="btn btn-ahar">View Detailed Process</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Who We Serve</h2>
+    </div>
+    <div class="row g-3 justify-content-center">
+      @foreach(var s in new[]{"Economically Backward Slums","Orphanages","Old Age Homes","Homeless People","Shelter Homes","Rural Communities"}){
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="text-center p-3 bg-light rounded-3 border-top border-warning border-3">
+            <i class="fa fa-heart text-danger mb-2 fa-lg"></i>
+            <p class="small fw-bold mb-0">@s</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- STATES -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="section-title text-center mb-5">States We Serve</h2>
+    <div class="row g-4 justify-content-center">
+      @foreach(var st in new[]{"Jharkhand","Bihar","Uttar Pradesh"}){
+        <div class="col-md-3 text-center">
+          <div class="ahar-card p-4">
+            <div style="font-size:3rem;">📍</div>
+            <h4 class="fw-bold mt-2">@st</h4>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5" style="background:linear-gradient(135deg,#f25f34,#e44d23);">
+  <div class="container text-center text-white">
+    <h2 class="fw-bold mb-3">Excess Food? Call Us Now!</h2>
+    <p class="lead mb-4 opacity-75">Don't let good food go to waste. One call and we'll pick it up!</p>
+    <a href="tel:8092308696" class="btn btn-light btn-lg text-warning fw-bold me-3">
+      <i class="fa fa-phone me-2"></i>80923 08696
+    </a>
+    <a asp-controller="User" asp-action="FoodPickup" class="btn btn-outline-light btn-lg">Request Online</a>
+  </div>
+</section>

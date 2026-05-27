@@ -1,0 +1,25 @@
+@{ ViewData["Title"] = "FAQ"; }
+<div class="page-header"><div class="container"><h1><i class="fa fa-question-circle me-3 text-warning"></i>Frequently Asked Questions</h1></div></div>
+<div class="container pb-5">
+  <div class="accordion" id="faqAccordion">
+    @foreach(var faq in new[]{
+      ("What kind of food do you accept?","We accept any kind of food – raw or cooked, packaged, hot or cold. We need to know food type and quantity. We avoid coconut-added items and curd/butter items as they spoil faster."),
+      ("What is the minimum quantity for pickup?","We pickup food that can serve minimum 50 people. For smaller quantities, please drop at our collection points."),
+      ("How do I donate food?","Call our helpline 80923 08696 or submit a pickup request online. We'll reach the collection point with our team."),
+      ("Where do you distribute food?","We serve Economically Backward Slums, Orphanages, Old Age Homes, Homeless People, Shelter Homes, and Rural Communities."),
+      ("What are your working hours?","We operate ALL DAYS from 9:00 AM to 10:00 PM."),
+      ("How can I volunteer?","Sign up as a Volunteer on our website and our team will contact you for onboarding.")
+    }.Select((f,i) => (f, i))){
+      <div class="accordion-item border-0 mb-2 rounded-3 shadow-sm">
+        <h2 class="accordion-header">
+          <button class="accordion-button @(faq.Item2==0?"":"collapsed") rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq@(faq.Item2)">
+            <i class="fa fa-question-circle text-warning me-2"></i>@faq.Item1.Item1
+          </button>
+        </h2>
+        <div id="faq@(faq.Item2)" class="accordion-collapse collapse @(faq.Item2==0?"show":"")" data-bs-parent="#faqAccordion">
+          <div class="accordion-body text-muted">@faq.Item1.Item2</div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

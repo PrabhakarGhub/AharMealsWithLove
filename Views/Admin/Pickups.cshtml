@@ -1,0 +1,44 @@
+@model List<Dictionary<string,string>>
+@{ ViewData["Title"] = "All Pickups"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-truck text-warning me-2"></i>All User Pickup Requests</h3>
+    <div class="d-flex gap-2 mb-3 flex-wrap">
+      <a asp-action="Pickups" class="btn btn-sm @(ViewBag.Filter=="All"?"btn-ahar":"btn-outline-secondary")">All</a>
+      @foreach(var f in new[]{"Submitted","Accept","Reject"}){
+        <a asp-action="Pickups" asp-route-filter="@f" class="btn btn-sm @(ViewBag.Filter==f?"btn-ahar":"btn-outline-secondary")">@f</a>
+      }
+    </div>
+    <div class="ahar-card p-3">
+      <div class="table-responsive"><table class="table ahar-table">
+        <thead><tr><th>#</th><th>User</th><th>Event</th><th>Venue</th><th>Date</th><th>Qty</th><th>Category</th><th>Cook Time</th><th>Exp Time</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          @if(Model.Count > 0){ foreach(var p in Model){
+            <tr>
+              <td>@p.GetValueOrDefault("ID","–")</td>
+              <td>@p.GetValueOrDefault("uname","–")</td>
+              <td>@p.GetValueOrDefault("eventdetail","–")</td>
+              <td>@p.GetValueOrDefault("venue","–")</td>
+              <td>@p.GetValueOrDefault("date","–")</td>
+              <td>@p.GetValueOrDefault("quantity","–")</td>
+              <td>@p.GetValueOrDefault("category","–")</td>
+              <td>@p.GetValueOrDefault("cooktime","–")</td>
+              <td>@p.GetValueOrDefault("exptime","–")</td>
+              <td><span class="badge badge-@p.GetValueOrDefault("status","submitted").ToLower()">@p.GetValueOrDefault("status","–")</span></td>
+              <td>
+                <form asp-action="UpdatePickupStatus" method="post" class="d-flex gap-1">
+                  <input type="hidden" name="id" value="@p["ID"]"/>
+                  <button name="status" value="Accept" class="btn btn-sm btn-success">Accept</button>
+                  <button name="status" value="Reject" class="btn btn-sm btn-danger">Reject</button>
+                </form>
+              </td>
+            </tr>
+          }} else {
+            <tr><td colspan="11" class="text-center text-muted py-4">No pickup requests found.</td></tr>
+          }
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div></div>

@@ -1,0 +1,20 @@
+@model List<Dictionary<string,string>>
+@{ ViewData["Title"] = "Donations"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-donate text-warning me-2"></i>Donation Records <span class="badge bg-secondary">@Model.Count</span></h3>
+    <div class="ahar-card p-3">
+      <div class="table-responsive"><table class="table ahar-table">
+        <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Mobile</th><th>DOB/Event</th><th>Address</th><th>People</th><th>Amount (₹)</th><th>Date</th></tr></thead>
+        <tbody>
+          @if(Model.Count > 0){ foreach(var d in Model){
+            <tr><td>@d.GetValueOrDefault("ID","–")</td><td>@d.GetValueOrDefault("name","–")</td><td>@d.GetValueOrDefault("email","–")</td>
+            <td>@d.GetValueOrDefault("mobile","–")</td><td>@d.GetValueOrDefault("dob","–")</td><td>@d.GetValueOrDefault("address","–")</td>
+            <td>@d.GetValueOrDefault("people","–")</td><td class="fw-bold text-success">₹@d.GetValueOrDefault("amount","–")</td><td>@d.GetValueOrDefault("date","–")</td></tr>
+          }} else { <tr><td colspan="9" class="text-center text-muted">No donations recorded yet.</td></tr> }
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div></div>

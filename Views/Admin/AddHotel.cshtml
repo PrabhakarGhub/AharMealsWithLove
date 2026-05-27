@@ -1,0 +1,22 @@
+@model AharMealsWithLove.Models.HotelEntryViewModel
+@{ ViewData["Title"] = "Add Hotel"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-hotel text-success me-2"></i>Register Hotel</h3>
+    @if(Model.Message != null){ <div class="alert alert-success"><i class="fa fa-check-circle me-2"></i>@Model.Message</div> }
+    <div class="ahar-card p-4">
+      <form asp-action="AddHotel" method="post">
+        <div class="row g-3">
+          <div class="col-md-6"><label class="form-label fw-bold">Hotel ID</label><input asp-for="HotelId" class="form-control form-control-lg" placeholder="Unique hotel ID"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Hotel Name</label><input asp-for="Name" class="form-control form-control-lg" placeholder="Hotel name"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Contact Number</label><input asp-for="Contact" class="form-control form-control-lg" placeholder="Phone number"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">FSSAI Number</label><input asp-for="Fssai" class="form-control form-control-lg" placeholder="FSSAI license number"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Email</label><input asp-for="Email" class="form-control form-control-lg" placeholder="Hotel email"/></div>
+          <div class="col-md-6"><label class="form-label fw-bold">Password</label><input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Login password"/></div>
+          <div class="col-12"><button type="submit" class="btn btn-success btn-lg px-5"><i class="fa fa-save me-2"></i>Register Hotel</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div></div>

@@ -1,0 +1,40 @@
+@model List<Dictionary<string,string>>
+@{ ViewData["Title"] = "Feedback"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-comment text-warning me-2"></i>Feedback & Complaints</h3>
+    <div class="d-flex gap-2 mb-3 flex-wrap">
+      <a asp-action="Feedback" class="btn btn-sm @(ViewBag.Filter=="All"?"btn-ahar":"btn-outline-secondary")">All</a>
+      @foreach(var f in new[]{"Feedback","Suggestions","Complaint"}){
+        <a asp-action="Feedback" asp-route-filter="@f" class="btn btn-sm @(ViewBag.Filter==f?"btn-ahar":"btn-outline-secondary")">@f</a>
+      }
+    </div>
+    <div class="ahar-card p-3">
+      <div class="table-responsive"><table class="table ahar-table">
+        <thead><tr><th>#</th><th>Ticket</th><th>Type</th><th>Regarding</th><th>Detail</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+          @if(Model.Count > 0){ foreach(var f in Model){
+            <tr><td>@f.GetValueOrDefault("ID","–")</td>
+            <td>@(f.GetValueOrDefault("Ticket","0") == "0" ? "N/A" : f.GetValueOrDefault("Ticket","–"))</td>
+            <td><span class="badge bg-info text-dark">@f.GetValueOrDefault("Reason","–")</span></td>
+            <td>@f.GetValueOrDefault("ComplainFor","–")</td>
+            <td style="max-width:200px;white-space:normal">@f.GetValueOrDefault("Detail","–")</td>
+            <td><span class="badge badge-@f.GetValueOrDefault("Status","submitted").ToLower()">@f.GetValueOrDefault("Status","–")</span></td>
+            <td>
+              <form asp-action="UpdateFeedbackStatus" method="post" class="d-flex gap-1 flex-wrap">
+                <input type="hidden" name="id" value="@f["ID"]"/>
+                <button name="status" value="Resolved" class="btn btn-sm btn-success">Resolved</button>
+                <button name="status" value="In Progress" class="btn btn-sm btn-warning text-dark">In Progress</button>
+              </form>
+              <form asp-action="DeleteFeedback" method="post" class="mt-1" onsubmit="return confirm('Delete this entry?')">
+                <input type="hidden" name="id" value="@f["ID"]"/>
+                <button class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </td></tr>
+          }} else { <tr><td colspan="7" class="text-center text-muted">No @ViewBag.Filter entries found.</td></tr> }
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div></div>

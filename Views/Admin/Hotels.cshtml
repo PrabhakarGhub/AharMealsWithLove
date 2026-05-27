@@ -1,0 +1,21 @@
+@model List<Dictionary<string,string>>
+@{ ViewData["Title"] = "Hotels"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="fw-bold mb-0"><i class="fa fa-hotel text-success me-2"></i>Hotels <span class="badge bg-secondary">@Model.Count</span></h3>
+      <a asp-action="AddHotel" class="btn btn-ahar"><i class="fa fa-plus me-2"></i>Add Hotel</a>
+    </div>
+    <div class="ahar-card p-3">
+      <div class="table-responsive"><table class="table ahar-table">
+        <thead><tr><th>Hotel ID</th><th>Name</th><th>Email</th><th>Contact</th><th>FSSAI</th></tr></thead>
+        <tbody>
+          @if(Model.Count > 0){ foreach(var h in Model){
+            <tr><td>@h.GetValueOrDefault("hotelid","–")</td><td>@h.GetValueOrDefault("Name","–")</td><td>@h.GetValueOrDefault("Email","–")</td><td>@h.GetValueOrDefault("Contact","–")</td><td>@h.GetValueOrDefault("fssai","–")</td></tr>
+          }} else { <tr><td colspan="5" class="text-center text-muted">No hotels registered yet.</td></tr> }
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div></div>

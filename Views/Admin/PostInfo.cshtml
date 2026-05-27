@@ -1,0 +1,18 @@
+@model AharMealsWithLove.Models.InfoViewModel
+@{ ViewData["Title"] = "Post Information"; }
+<div class="container-fluid"><div class="row">
+  @await Html.PartialAsync("_AdminSidebar")
+  <div class="col-md-10 py-4">
+    <h3 class="fw-bold mb-4"><i class="fa fa-bullhorn text-warning me-2"></i>Post Information</h3>
+    @if(Model.Message != null){ <div class="alert alert-success"><i class="fa fa-check-circle me-2"></i>@Model.Message</div> }
+    <div class="ahar-card p-4">
+      <p class="text-muted mb-4">This information will appear in user/volunteer dashboards as an information feed.</p>
+      <form asp-action="PostInfo" method="post">
+        <div class="mb-3"><label class="form-label fw-bold">Subject</label><input asp-for="Subject" class="form-control form-control-lg" placeholder="e.g. New Ahar Spot added in Doranda"/></div>
+        <div class="mb-3"><label class="form-label fw-bold">Description</label><textarea asp-for="Description" class="form-control" rows="5" placeholder="Describe the information in detail..."></textarea></div>
+        <div class="mb-3"><label class="form-label fw-bold">Link (optional)</label><input asp-for="Link" class="form-control form-control-lg" placeholder="https://..."/></div>
+        <button type="submit" class="btn btn-ahar btn-lg px-5"><i class="fa fa-paper-plane me-2"></i>Post Information</button>
+      </form>
+    </div>
+  </div>
+</div></div>

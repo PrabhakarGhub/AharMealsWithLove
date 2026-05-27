@@ -1,0 +1,36 @@
+@{ ViewData["Title"] = "How It Works"; }
+<div class="page-header"><div class="container"><h1><i class="fa fa-cogs me-3 text-warning"></i>How It Works</h1><p class="text-light">Call us on <strong>+91 80923 08696</strong> | ahar.in@gmail.com</p></div></div>
+<div class="container pb-5">
+  <div class="row g-4 mb-5">
+    @foreach(var step in new[]{
+      ("1","fa-phone","Call Us or Send Pickup Request","Call 80923 08696 for pickup of excess food serving minimum 50 people. For less than 50 please drop at our collection points."),
+      ("2","fa-search","Quality Check","Our staff/volunteers reach the pickup point, food quality is checked and transferred to dedicated vessels."),
+      ("3","fa-map-marker-alt","Locate Ahar Spot","Food recovery vehicle reaches Ahar spots near the pickup point for food distribution."),
+      ("4","fa-truck","Deliver Food","Food is distributed to needy and hungry people at hunger spots.")
+    }){
+      <div class="col-md-6">
+        <div class="d-flex gap-3 p-4 bg-white rounded-3 shadow-sm h-100">
+          <div class="step-number flex-shrink-0">@step.Item1</div>
+          <div><i class="fa @step.Item2 fa-2x text-warning mb-2"></i><h4 class="fw-bold">@step.Item3</h4><p class="text-muted mb-0">@step.Item4</p></div>
+        </div>
+      </div>
+    }
+  </div>
+  <h3 class="section-title mb-4">Daily Activities Schedule</h3>
+  <div class="table-responsive"><table class="table ahar-table process-table">
+    <thead><tr><th>Time</th><th>Work</th><th>Staff/Volunteer</th><th>Location</th></tr></thead>
+    <tbody>
+      <tr><td>8:30 AM</td><td>Office Starts – Follow up on food donations</td><td>Call Center Staff, Volunteer</td><td>Ahar Office</td></tr>
+      <tr><td>8:30–9:30 AM</td><td>Distribute previous day stored food to needy in slums</td><td>Driver, Volunteer</td><td>Different parts of city</td></tr>
+      <tr><td>9:30–11:00 AM</td><td>Wait for calls and pickup requests from donors</td><td>Call Center Staff</td><td>Ahar Office</td></tr>
+      <tr><td>11:00 AM–12:30 PM</td><td>Driver collects food from all pickup locations</td><td>Driver, Volunteer</td><td>Locations per pickup request</td></tr>
+      <tr><td>12:30–2:30 PM</td><td>Foods distributed to Orphanages, Slums, Hospitals</td><td>Driver, Food Counter Staff</td><td>Predefined Distribution Points</td></tr>
+      <tr><td>2:30–3:00 PM</td><td>Break</td><td>–</td><td>–</td></tr>
+      <tr><td>3:00–3:30 PM</td><td>Clean vessels, ready vehicle for next drive</td><td>Call Center Staff, Driver</td><td>Ahar Facility Center</td></tr>
+      <tr><td>3:30–4:30 PM</td><td>Route map for afternoon collection</td><td>Call Center Staff</td><td>Ahar Office</td></tr>
+      <tr><td>4:30–6:00 PM</td><td>Driver collects afternoon pickup requests</td><td>Driver, Volunteer</td><td>Multiple Locations</td></tr>
+      <tr><td>6:00–8:00 PM</td><td>Food distribution for dinner</td><td>Driver, Volunteer</td><td>Distribution Points</td></tr>
+      <tr><td>8:00–10:00 PM</td><td>Night collection drive</td><td>Driver, Volunteer</td><td>Multiple Locations</td></tr>
+    </tbody>
+  </table></div>
+</div>
