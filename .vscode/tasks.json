@@ -3,8 +3,16 @@
   "tasks": [
     {
       "label": "Run AHAR",
-      "type": "shell",
-      "command": "C:\\Users\\bhagy\\OneDrive\\Documents\\New project\\AharMealsWithLove\\run-project.bat",
+      "type": "process",
+      "command": "C:\\Windows\\System32\\cmd.exe",
+      "args": [
+        "/d",
+        "/c",
+        "run-project.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": [],
       "group": {
         "kind": "build",

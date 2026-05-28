@@ -7,5 +7,11 @@ set LOCALAPPDATA=%~dp0..\.localappdata
 
 echo Starting AHAR - Meals with Love...
 echo Open http://localhost:5098 in your browser.
+powershell -NoProfile -Command "try { Invoke-WebRequest -Uri 'http://localhost:5098' -UseBasicParsing -TimeoutSec 2 | Out-Null; exit 0 } catch { exit 1 }"
+if %ERRORLEVEL% EQU 0 (
+  echo AHAR is already running at http://localhost:5098
+  pause
+  exit /b 0
+)
 "C:\Program Files\dotnet\dotnet.exe" run --urls http://localhost:5098
 pause
